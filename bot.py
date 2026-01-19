@@ -1,7 +1,7 @@
 # (©)Mzbotz
 
 from aiohttp import web
-from from plugins.web_server import web_server
+from plugins.web_server import web_server
 
 import pyromod.listen
 from pyrogram import Client
