@@ -134,7 +134,7 @@ async def auto_post(client, message):
     quality = f"{lang} {res} {codec} {source} [{audio}]"
 
     size = size_format(file.file_size)
-    link = f"https://t.me/c/{str(CHANNEL_ID)[4:]}/{message.id}"
+    link = f"https://t.me/{bot.username}?start=file_{msg.id}"
 
     if key not in cache:
         cache[key] = []
