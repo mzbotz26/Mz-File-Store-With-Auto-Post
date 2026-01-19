@@ -13,6 +13,7 @@ API_HASH = os.environ.get("API_HASH", "")
 # ================= API =================
 
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
+OMDB_API_KEY = os.environ.get("OMDB_API_KEY", "")
 
 # ================= CHANNELS =================
 
