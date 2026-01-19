@@ -1,0 +1,20 @@
+# Telegram
+pyrogram>=2.0.0
+tgcrypto
+pyromod
+
+# Database
+motor
+pymongo
+dnspython
+
+# Utilities
+parse-torrent-name
+requests
+thefuzz
+shortzy
+aiohttp
+cinemagoer
+aiofiles
+pytz
+beautifulsoup4
