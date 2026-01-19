@@ -73,7 +73,7 @@ async def save_file(client, message):
 
     # Generate direct link
     channel_part = str(CHANNEL_ID)[4:]
-    link = f"https://t.me/c/{channel_part}/{msg.id}"
+    link = f"https://t.me/{bot.username}?start=file_{msg.id}"
 
     # Reply to user
     await message.reply_text(
