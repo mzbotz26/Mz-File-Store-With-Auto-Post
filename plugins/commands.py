@@ -11,7 +11,10 @@ db = Database()
 
 @Client.on_message(filters.command("start") & filters.private)
 async def start_cmd(client, message):
-    db.add_user(message.from_user.id)
+    try:
+        db.add_user(message.from_user.id)
+    except:
+        pass
 
     await message.reply_text(
         "👋 Welcome!\n\n"
@@ -47,7 +50,11 @@ async def users_cmd(client, message):
     if message.from_user.id not in ADMINS:
         return
 
-    total = db.total_users()
+    try:
+        total = db.users.count_documents({})
+    except:
+        total = 0
+
     await message.reply_text(f"👥 Total Users: {total}")
 
 # ───────── STATS (ADMIN) ─────────
@@ -58,7 +65,11 @@ async def stats_cmd(client, message):
         return
 
     uptime = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    total = db.total_users()
+
+    try:
+        total = db.users.count_documents({})
+    except:
+        total = 0
 
     await message.reply_text(
         f"📊 Bot Stats\n\n"
@@ -83,7 +94,7 @@ async def broadcast_cmd(client, message):
         try:
             await message.reply_to_message.copy(user["_id"])
             sent += 1
-            await asyncio.sleep(0.3)
+            await asyncio.sleep(0.25)
         except:
             failed += 1
 
