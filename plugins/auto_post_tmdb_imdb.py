@@ -118,11 +118,11 @@ async def auto_post(client, message):
 
     if ep:
         season, episode = ep
-        key = f"{title} Season {season}"
+        key = f"{title.lower()}_season_{season}"
     else:
         season = None
         episode = None
-        key = title
+        key = title.lower()
 
     lang = detect_language(name)
     res = detect_resolution(name)
@@ -141,7 +141,7 @@ async def auto_post(client, message):
 
     cache[key].append((quality,size,link,episode))
 
-    await asyncio.sleep(8)
+    await asyncio.sleep(10)
 
     files = cache.get(key)
     if not files:
@@ -173,11 +173,9 @@ async def auto_post(client, message):
     if season:
         caption += f"\n📺 <b>Season:</b> {season}\n"
 
-    ep_no = 1
     for q,s,l,e in files:
-        ep_txt = f"E{e:02d}" if e else ""
+        ep_txt = f"E{int(e):02d}" if e else ""
         caption += f"\n📁 ➤ <b>{q} {ep_txt}</b>\n📥 ➪ <a href='{l}'>Get File ({s})</a>\n"
-        ep_no += 1
 
     caption += "\n💪 Powered By : <a href='https://t.me/MzMoviiez'>MzMoviiez</a>"
 
@@ -186,4 +184,4 @@ async def auto_post(client, message):
     else:
         await client.send_message(POST_CHANNEL, caption, disable_web_page_preview=True)
 
-    del cache[key]
+    cache.pop(key, None)
